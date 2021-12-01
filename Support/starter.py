@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-import argparse
 import os.path
-
 import pytest
-
 import time
 
 DATA = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -38,11 +35,8 @@ def test(input_s: str, expected: int) -> None:
 
 def main() -> int:
     start = time.time()
-    parser = argparse.ArgumentParser()
-    parser.add_argument('data_file', nargs='?', default=DATA)
-    args = parser.parse_args()
 
-    with open(args.data_file) as f:
+    with open(DATA) as f:
         print(compute(f.read()))
     print('Time taken {} seconds'.format(round(time.time() - start, 2)))
 
