@@ -11,5 +11,15 @@ and to learn.
 - Have Fun
 
 ### Timings 
-Solutions Run Times\
-Day01
+Solutions and Run Times
+#### Day01
+    Part 1
+    1446
+    Time taken 0.0μs
+    
+    Part 2
+    1486
+    Time taken 0.0μs
+   
+### Updates and Notes
+Added timing file to change units and times based on run time. 12/1/202
