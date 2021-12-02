@@ -1,5 +1,5 @@
 from __future__ import annotations
-from Support import timing
+from Support.timing import timing
 
 import os.path
 import pytest
@@ -9,34 +9,36 @@ DATA = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 
 def compute(s: str) -> int:
-    numbers = [int(line) for line in s.splitlines()]
-    prev = numbers[0]
-    count = 0
-    for i in range(3, len(numbers)):
-        if numbers[i] > prev:
-            count += 1
-        prev = numbers[i - 2]
-    return count
+    lines = s.splitlines()
+    h = 0
+    v = 0
+    for line in lines:
+        dir, val_s = line.split()
+        val = int(val_s)
+        if dir == 'forward':
+            h += val
+        if dir == 'down':
+            v += val
+        if dir == 'up':
+            v -= val
+
+    return h*v
 
 
 TESTDATA = '''\
-199
-200
-208
-210
-200
-207
-240
-269
-260
-263
+forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2
 '''
 
 
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-            (TESTDATA, 5),
+            (TESTDATA, 150),
     ),
 )
 def test(input_s: str, expected: int) -> None:
@@ -48,7 +50,7 @@ def main() -> int:
 
     with open(DATA) as f:
         print(compute(f.read()))
-    timing.timing(start, time.time())
+    timing(start, time.time())
 
     return 0
 

@@ -38,7 +38,7 @@ def main() -> int:
 
     with open(DATA) as f:
         print(compute(f.read()))
-    print('Time taken {} seconds'.format(round(time.time() - start, 2)))
+    timing(start, time.time())
 
     return 0
 
