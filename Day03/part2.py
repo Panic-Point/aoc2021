@@ -1,9 +1,8 @@
 from __future__ import annotations
 from Support.timing import timing
-from copy import deepcopy
+
 
 import os.path
-import pytest
 import time
 
 DATA = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -48,18 +47,8 @@ TESTDATA = '''\
 '''
 
 
-
-@pytest.mark.parametrize(
-    ('input_s', 'expected'),
-    (
-            (TESTDATA, 230),
-    ),
-)
-def test(input_s: str, expected: int) -> None:
-    assert compute(input_s) == expected
-
-
 def main() -> int:
+    assert compute(TESTDATA) == 230
     start = time.time()
 
     with open(DATA) as f:
