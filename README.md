@@ -29,4 +29,13 @@ Solutions and Run Times
     Part 2
     1982495697
     Time taken 1000.166μs
+    
+#### Day03
+    Part 1
+    4174964
+    Time taken 2000.332μs
+
+    Part 2
+    4474944
+    Time taken 999.928μs
    

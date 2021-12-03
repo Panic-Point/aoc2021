@@ -10,35 +10,40 @@ DATA = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 def compute(s: str) -> int:
     lines = s.splitlines()
-    h = 0
-    v = 0
-    for line in lines:
-        dir_s, val_s = line.split()
-        val = int(val_s)
-        if dir_s == 'forward':
-            h += val
-        if dir_s == 'down':
-            v += val
-        if dir_s == 'up':
-            v -= val
-
-    return h*v
-
+    cols = list(zip(*lines))
+    gamma = ''
+    epsilon = ''
+    for c in cols:
+        ones = sum([i == '1' for i in c])
+        zeros = len(c) - ones
+        if ones >= zeros:
+            gamma += '1'
+            epsilon += '0'
+        else:
+            gamma += '0'
+            epsilon += '1'
+    return int(gamma, 2) * int(epsilon, 2)
 
 TESTDATA = '''\
-forward 5
-down 5
-forward 8
-up 3
-down 8
-forward 2
+00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010
 '''
 
 
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-            (TESTDATA, 150),
+            (TESTDATA, 198),
     ),
 )
 def test(input_s: str, expected: int) -> None:

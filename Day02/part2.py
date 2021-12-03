@@ -14,14 +14,14 @@ def compute(s: str) -> int:
     v = 0
     aim = 0
     for line in lines:
-        dir, val_s = line.split()
+        dir_s, val_s = line.split()
         val = int(val_s)
-        if dir == 'forward':
+        if dir_s == 'forward':
             h += val
             v += val*aim
-        if dir == 'down':
+        if dir_s == 'down':
             aim += val
-        if dir == 'up':
+        if dir_s == 'up':
             aim -= val
 
     return h*v
