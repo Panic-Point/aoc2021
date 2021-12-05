@@ -13,6 +13,7 @@ def parse(s: str):
     second = tuple(end.split(','))
     return first, second
 
+
 def compute(s: str) -> int:
     lines = s.splitlines()
     vents = list()
