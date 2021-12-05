@@ -11,22 +11,23 @@ def compute(s: str) -> int:
     numbers = [int(x) for x in lines[0].split(',')]
     boards = [[int(y) for y in lines[i].split()] for i in range(1, len(lines))]
     marked = [[False for _ in board] for board in boards]
-    winners = set()
+    boards_left = set(range(len(boards)))
     used = list()
 
     for n in numbers:
         used.append(n)
-        for i in range(len(boards)):
-            if n in boards[i]:
-                pos = boards[i].index(n)
-                marked[i][pos] = True
-                rows = [sum(marked[i][j:j+5]) for j in range(0, len(marked[i]), 5)]
-                cols = [sum(marked[i][j::5]) for j in range(5)]
+        for board in boards:
+            if n in board:
+                pos = board.index(n)
+                b_pos = boards.index(board)
+                marked[b_pos][pos] = True
+                rows = [sum(marked[b_pos][j:j+5]) for j in range(0, len(marked[b_pos]), 5)]
+                cols = [sum(marked[b_pos][j::5]) for j in range(5)]
                 if 5 in rows or 5 in cols:
-                    winners.add(i)
-        if len(winners) == len(boards) - 1:
-            loser = set(range(len(boards))).difference(winners).pop()
-        if len(winners) == len(boards):
+                    boards_left.discard(b_pos)
+        if len(boards_left) == 1:
+            loser = list(boards_left)[0]
+        if len(boards_left) == 0:
             break
         else:
             continue
