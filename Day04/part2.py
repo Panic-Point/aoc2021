@@ -11,7 +11,7 @@ def compute(s: str) -> int:
     lines = s.split('\n\n')
     numbers = [int(x) for x in lines[0].split(',')]
     boards = [[int(y) for y in lines[i].split()] for i in range(1, len(lines))]
-    marked = [[False for _ in boards[j]] for j in range(len(boards))]
+    marked = [[False for _ in board] for board in boards]
     winners = set()
     used = list()
 
@@ -21,7 +21,6 @@ def compute(s: str) -> int:
             if n in boards[i]:
                 pos = boards[i].index(n)
                 marked[i][pos] = True
-
                 rows = [sum(marked[i][j:j+5]) for j in range(0, len(marked[i]), 5)]
                 cols = [sum(marked[i][j::5]) for j in range(5)]
                 if 5 in rows or 5 in cols:
@@ -33,7 +32,7 @@ def compute(s: str) -> int:
         else:
             continue
 
-    unmarked = sum([int(x) for x in boards[loser] if x not in used])
+    unmarked = sum([x for x in boards[loser] if x not in used])
     return unmarked*used[-1]
 
 
